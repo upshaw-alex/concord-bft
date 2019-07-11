@@ -100,6 +100,7 @@ struct Config {
   uint16_t maxNumberOfChunksInBatch = 24;
   uint32_t maxPendingDataFromSourceReplica = 32 * 1024 * 1024;
 
+  // TODO (Alex): Figure out whether this field is easily configurable from the outside world. If it isn't, make it so.
   uint32_t maxNumOfReservedPages = 2048;
 
   uint32_t refreshTimerMilli = 300;  // 300ms

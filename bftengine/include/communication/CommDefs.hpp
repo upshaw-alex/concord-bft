@@ -53,6 +53,7 @@ struct BaseCommConfig {
   std::string listenIp;
   uint16_t listenPort;
   uint32_t bufferLength;
+  uint32_t maxExternalMessageSize;
   NodeMap nodes;
   UPDATE_CONNECTIVITY_FN statusCallback;
   NodeNum selfId;
@@ -61,6 +62,7 @@ struct BaseCommConfig {
                  std::string ip,
                  uint16_t port,
                  uint32_t bufLength,
+                 uint32_t maxExternMsgSz,
                  NodeMap _nodes,
                  NodeNum _selfId,
                  UPDATE_CONNECTIVITY_FN _statusCallback = nullptr) :
@@ -68,6 +70,7 @@ struct BaseCommConfig {
       listenIp{std::move(ip)},
       listenPort{port},
       bufferLength{bufLength},
+      maxExternalMessageSize{maxExternMsgSz},
       nodes{std::move(_nodes)},
       statusCallback{_statusCallback},
       selfId {_selfId} {
@@ -80,6 +83,7 @@ struct PlainUdpConfig : BaseCommConfig {
   PlainUdpConfig(std::string ip,
                  uint16_t port,
                  uint32_t bufLength,
+                 uint32_t maxExternMsgSz,
                  NodeMap _nodes,
                  NodeNum _selfId,
                  UPDATE_CONNECTIVITY_FN _statusCallback = nullptr) :
@@ -87,6 +91,7 @@ struct PlainUdpConfig : BaseCommConfig {
                      std::move(ip),
                      port,
                      bufLength,
+                     maxExternMsgSz,
                      std::move(_nodes),
                      _selfId,
                      _statusCallback) {
@@ -99,6 +104,7 @@ struct PlainTcpConfig : BaseCommConfig {
   PlainTcpConfig(std::string ip,
                  uint16_t port,
                  uint32_t bufLength,
+                 uint32_t maxExternMsgSz,
                  NodeMap _nodes,
                  int32_t _maxServerId,
                  NodeNum _selfId,
@@ -107,6 +113,7 @@ struct PlainTcpConfig : BaseCommConfig {
                      std::move(ip),
                      port,
                      bufLength,
+                     maxExternMsgSz,
                      std::move(_nodes),
                      _selfId,
                      _statusCallback),
@@ -124,6 +131,7 @@ struct TlsTcpConfig : PlainTcpConfig {
   TlsTcpConfig(std::string ip,
                uint16_t port,
                uint32_t bufLength,
+               uint32_t maxExternMsgSz,
                NodeMap _nodes,
                int32_t _maxServerId,
                NodeNum _selfId,
@@ -133,6 +141,7 @@ struct TlsTcpConfig : PlainTcpConfig {
       PlainTcpConfig(move(ip),
                      port,
                      bufLength,
+                     maxExternMsgSz,
                      std::move(_nodes),
                      _maxServerId,
                      _selfId,

@@ -164,7 +164,8 @@ PlainUdpConfig TestCommConfig::GetUDPConfig(
       SetUpNodes(is_replica, node_id, ip, port, num_of_clients,
                  num_of_replicas, config_file_name);
 
-  PlainUdpConfig ret_val(default_listen_ip_, port, buf_length_, nodes, node_id);
+  PlainUdpConfig ret_val(default_listen_ip_, port, buf_length_,
+      max_external_message_size_, nodes, node_id);
   return ret_val;
 }
 
@@ -179,8 +180,8 @@ PlainTcpConfig TestCommConfig::GetTCPConfig(
       SetUpNodes(is_replica, node_id, ip, port, num_of_clients, num_of_replicas,
                  config_file_name);
 
-  PlainTcpConfig ret_val(
-      default_listen_ip_, port, buf_length_, nodes, num_of_replicas - 1, node_id);
+  PlainTcpConfig ret_val(default_listen_ip_, port, buf_length_,
+      max_external_message_size_, nodes, num_of_replicas - 1, node_id);
   return ret_val;
 }
 
@@ -195,8 +196,8 @@ TlsTcpConfig TestCommConfig::GetTlsTCPConfig(
                  config_file_name);
 
   // need to move the default cipher suite to the config file
-  TlsTcpConfig retVal(default_listen_ip_, port, buf_length_, nodes,
-                      num_of_replicas -1, id, "certs",
-                      "ECDHE-ECDSA-AES256-GCM-SHA384");
+  TlsTcpConfig retVal(default_listen_ip_, port, buf_length_,
+                      max_external_message_size_, nodes, num_of_replicas -1, id,
+                      "certs", "ECDHE-ECDSA-AES256-GCM-SHA384");
   return retVal;
 }

@@ -64,6 +64,7 @@ class TestCommConfig: public ITestCommConfig {
     // basePort + (2 * index).
     static const uint16_t    base_port_ = 3710;
     static const uint32_t    buf_length_ = 64000;
+    static const uint32_t    max_external_message_size_ = 64000;
     static const std::string default_ip_;
     static const std::string default_listen_ip_;
     static const char*       ip_port_delimiter_;
